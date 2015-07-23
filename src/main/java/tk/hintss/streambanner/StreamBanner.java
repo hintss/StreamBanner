@@ -55,6 +55,8 @@ public class StreamBanner {
                 sb.append("Error getting commit");
             }
 
+            sb.append("          ");
+
             /* competition-specific code, set targetTime to the unix time of the competition ending
 
             sb.append("\r\n");
