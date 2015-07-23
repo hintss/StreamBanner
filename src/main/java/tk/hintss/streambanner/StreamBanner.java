@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class StreamBanner {
+    //private static SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd hh:mm:ss yyyy XXXX");
+
     public static void main(String[] args) {
+
         long lastSecond = 0L;
 
         while (true) {
@@ -32,12 +35,17 @@ public class StreamBanner {
 
                 List<GitLogResponse.Commit> commits = DotGit.getInstance("./").getLog();
                 GitLogResponse.Commit commit = commits.get(0);
-                sb.append(safeSubstring(commit.getSha(), 7));
-                sb.append(" - ");
                 sb.append(safeSubstring(commit.getMessage().trim(), 80));
 
                 sb.append("\" at ");
 
+                /*
+                try {
+                    Date date = df.parse(commit.getDateString());
+                    sb.append()
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }*/
                 sb.append(commit.getDateString());
             } catch (JavaGitException e) {
                 e.printStackTrace();
