@@ -4,6 +4,9 @@ import edu.nyu.cs.javagit.api.DotGit;
 import edu.nyu.cs.javagit.api.JavaGitException;
 import edu.nyu.cs.javagit.api.commands.GitLogResponse;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class StreamBanner {
                 sb.append("Error getting commit");
             }
 
-            /*
+            /* competition-specific code, set targetTime to the unix time of the competition ending
 
             sb.append("\r\n");
 
@@ -58,6 +61,8 @@ public class StreamBanner {
                 sb.append("Time remaining: ");
                 sb.append(timeToString(timeUntil));
             }
+
+            */
 
             try {
                 System.out.println(sb.toString());
@@ -75,8 +80,6 @@ public class StreamBanner {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            */
         }
     }
 
