@@ -9,12 +9,12 @@ import java.util.List;
 
 public class StreamBanner {
     public static void main(String[] args) {
-        Long lastSecond = 0L;
+        long lastSecond = 0L;
 
         while (true) {
             while (lastSecond == System.currentTimeMillis() / 1000) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -27,7 +27,7 @@ public class StreamBanner {
             try {
                 sb.append("Latest Commit: \"");
 
-                List<GitLogResponse.Commit> commits = DotGit.getInstance("../../hintss-t3/").getLog();
+                List<GitLogResponse.Commit> commits = DotGit.getInstance("./").getLog();
                 GitLogResponse.Commit commit = commits.get(0);
                 sb.append(commit.getMessage().trim());
 
