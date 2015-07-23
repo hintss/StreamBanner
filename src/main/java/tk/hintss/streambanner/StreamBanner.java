@@ -32,7 +32,9 @@ public class StreamBanner {
 
                 List<GitLogResponse.Commit> commits = DotGit.getInstance("./").getLog();
                 GitLogResponse.Commit commit = commits.get(0);
-                sb.append(commit.getMessage().trim());
+                sb.append(safeSubstring(commit.getSha(), 7));
+                sb.append(" - ");
+                sb.append(safeSubstring(commit.getMessage().trim(), 80));
 
                 sb.append("\" at ");
 
@@ -81,6 +83,18 @@ public class StreamBanner {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static String safeSubstring(String in, int cutLength) {
+        if (in == null) {
+            return null;
+        }
+
+        if (in.length() > cutLength) {
+            in = in.substring(cutLength);
+        }
+
+        return in;
     }
 
     public static String timeToString(long seconds) {
