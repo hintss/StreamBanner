@@ -14,21 +14,9 @@ public class StreamBanner {
     //private static SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd hh:mm:ss yyyy XXXX");
 
     public static void main(String[] args) {
-
-        long lastSecond = 0L;
         String lastResult = "";
 
         while (true) {
-            while (lastSecond == System.currentTimeMillis() / 1000) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            lastSecond = System.currentTimeMillis() / 1000;
-
             StringBuilder sb = new StringBuilder();
 
             try {
@@ -101,6 +89,12 @@ public class StreamBanner {
                 }
 
                 lastResult = sb.toString();
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
