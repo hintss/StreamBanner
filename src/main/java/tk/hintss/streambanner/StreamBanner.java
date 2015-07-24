@@ -16,6 +16,7 @@ public class StreamBanner {
     public static void main(String[] args) {
 
         long lastSecond = 0L;
+        String lastResult = "";
 
         while (true) {
             while (lastSecond == System.currentTimeMillis() / 1000) {
@@ -81,21 +82,25 @@ public class StreamBanner {
 
             */
 
-            try {
-                System.out.println(sb.toString());
+            if (sb.toString() != lastResult) {
+                try {
+                    System.out.println(sb.toString());
 
-                File file = new File("output.txt");
+                    File file = new File("output.txt");
 
-                if (!file.exists()) {
-                    file.createNewFile();
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(sb.toString());
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(sb.toString());
-                bw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                lastResult = sb.toString();
             }
         }
     }
