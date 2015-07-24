@@ -31,10 +31,15 @@ public class StreamBanner {
             StringBuilder sb = new StringBuilder();
 
             try {
-                sb.append("Latest Commit: \"");
+                sb.append("Latest Commit: ");
 
                 List<GitLogResponse.Commit> commits = DotGit.getInstance("./").getLog();
                 GitLogResponse.Commit commit = commits.get(0);
+
+                sb.append(commit.getSha().substring(0, 7));
+
+                sb.append(" - \"");
+
                 sb.append(safeSubstring(commit.getMessage().trim(), 80));
 
                 sb.append("\" at ");
